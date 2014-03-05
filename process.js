@@ -61,21 +61,9 @@ function processReqChange() {
             }
 			
             calculate(0,0,0);
-            
-            var final=[];
-            var k=0;
-            for(i=0;i<selected.length;i+=3)
-            {
-                final[k]=[];
-                for(var j=0;j<3;j++)
-                {
-
-                    final[k][j]=selected[i+j];
-
-                }
-                k++;
-            }
-			print(final);
+			
+            print();
+           
             /*	for(var i=0;i<final.length;i++)
              {
              for(var j=0;j<final[0].length;j++)
@@ -109,24 +97,30 @@ function calculate(sumSoFar,numUsed,startIndex)
 }
 
 //print creates the string to be printed and prints it.
-function print(final)
+function print()
 {
+
+	alert(count);
     var toPrint="<tr><th>S.No.</th><th>Product Combo</th><th>Original Price</th><th>Zappos Price</th></tr>";
-    for(var i=0;i<selected.length;i+=3)
+    for(var i=0;i<selected.length;i=i+parseInt(count))
     {
-     toPrint+="<tr><th>"+((i/3)+1)+"</th><td><a href=\""+doc.results[selected[i+0]].productUrl +
-        "\"><img src=\""+doc.results[selected[i+0]].thumbnailImageUrl+"\" height=\"\200\" width=\"250\"/></a>" +
-         "<a href=\""+doc.results[selected[i+1]].productUrl +
-         "\"><img src=\""+doc.results[selected[i+1]].thumbnailImageUrl+"\" height=\"200\" width=\"250\"/></a>" +
-         "<a href=\""+doc.results[selected[i+2]].productUrl +
-         "\"><img src=\""+doc.results[selected[i+2]].thumbnailImageUrl+"\" height=\"200\" width=\"250\"/></a>" +
-         "</td><td>$"+(parseInt(doc.results[selected[i+0]].originalPrice.replace('$',''))+
-         parseInt(doc.results[selected[i+1]].originalPrice.replace('$',''))+
-         parseInt(doc.results[selected[i+2]].originalPrice.replace('$','')))+"</td><td>$"+
-         (parseInt(doc.results[selected[i+0]].price.replace('$',''))+
-         parseInt(doc.results[selected[i+1]].price.replace('$',''))+
-         parseInt(doc.results[selected[i+2]].price.replace('$','')))+"</td></tr>";
+     toPrint+="<tr><th>"+((i/count)+1)+"</th><td>";
+		for(var j=0;j<count;j++)
+			toPrint+="<a href=\""+doc.results[selected[i+j]].productUrl +
+        "\"><img src=\""+doc.results[selected[i+j]].thumbnailImageUrl+"\" height=\"200\" width=\"250\"/></a>";
+        toPrint+= "</td><td>$";
+	
+		var sum=0;
+		for(var j=0;j<count;j++)
+			sum+=(parseInt(doc.results[selected[i+j]].originalPrice.replace('$','')));
+		toPrint+=sum+"</td><td>$";
+		sum=0;
+		for(var j=0;j<count;j++)
+			sum+=parseInt(doc.results[selected[i+j]].price.replace('$',''));
+		toPrint+=sum+"</td></tr>";
+	
     }
+	alert(toPrint + "here");
 	document.getElementById("tbl1").innerHTML=toPrint;
 	document.getElementById("tbl1").style.visibility='visible';
 }
