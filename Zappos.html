@@ -1,0 +1,24 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<title> Zappos Challenge </title>
+<script src="process.js"></script>
+</head>
+<body>
+<form>
+  Please make following choices:-<br><br>
+  Quantity: 1<input type="range" id="count" value="1" min="1" max="10">10<br><br>
+  Amount (between $1 and $10000): <input type="number" id="cost" min="1" max="10000"><br><br>
+  Variation (between $1 and $500): <input type="number" id="var" min="0" max="500"><br><br>
+  Select the type of gifts:-<br>
+  <input type="radio" name="type" id="item1" value=""> All Items<br>
+  <input type="radio" name="type" id="item2" value="boots"> Boots Only<br>
+  <input type="radio" name="type" id="item3" value="bags"> Bags Only<br><br>
+  <input type="button" value="Submit" onclick="process()">
+</form>
+
+<table style="width:500px; visibility:hidden" border="1px" id="tbl1" >
+</table>
+
+</body>
+</html>
